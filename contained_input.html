@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Code Generator</title>
+    <style>
+      * {
+        font-family: Arial;
+        font-size: 16px;
+        padding: 0px;
+        margin: 0px;
+      }
+
+      #copyCount {
+        width: 10%;
+        text-align: right;
+      }
+
+      button {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      table {
+        padding-left: 5%;
+        padding-right: 5%;
+        width: 100%;
+      }
+
+      table, th, td {
+        border: 1px solid black;
+      }
+
+      button {
+        padding: 3px 10px 3px 10px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1>Code Generator</h1>
+
+    </br>
+
+    <form id="settingsForm">
+      <div>
+        <label for="copyCount">Enter Desired Number Of Codes (rounded to the nearest even number):</label>
+        <input id="copyCount" type="number" value="2" min="2" max="100" step="2" required>
+      </div>
+
+      <div>
+        <label for="amount">Select The Amount:</label>
+        <select id="amount">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+        </select>
+      </div>
+
+      <button onclick="makeRequest()">Submit</button>
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+      // 
+      function submitForm(response) {
+        document.getElementById("result").innerText = response;
+      }
+      async function makeRequest(){
+        let copyCount = document.getElementById("copyCount").value;
+        let amount = document.getElementById("amount").value;
+        // Prevents program from running if `copyCount` is odd
+        if (copyCount % 2 !== 0) {
+          return;
+        }
+
+        try {
+          // Calls Python function
+          let output = await pywebview.api.submit_generation_request([copyCount, amount]);
+          submitForm(output)
+        } catch (error) {
+          console.error(error);
+        }
+
+      }
+    </script>
+  </body>
+</html>
