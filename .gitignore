@@ -162,12 +162,6 @@ cython_debug/
 !codes/.empty
 !codes/donation_codes_test.csv
 codes/
-!templates/.empty
-!templates/Donation_Template_Editable 1.docx
-!templates/Donation_Template_Complete 1.docx
-templates/
-!to_print/.empty
-to_print/
 !config/config_template.ini
 !config/.empty
 config/
